@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EarnV1 - انطلق نحو المكافآت</title>
+    <style>
+        /* الخطوط والألوان */
+        :root {
+            --primary-color: #ff5722; /* برتقالي مرح */
+            --secondary-color: #333333; /* لون نص داكن */
+            --accent-color: #03a9f4; /* أزرق سماوي */
+            --text-light: #ffffff;
+            --main-font: 'Changa', sans-serif;
+            --body-font: 'Cairo', sans-serif;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--secondary-color);
+            margin: 0;
+            overflow: hidden; /* لمنع ظهور شريط التمرير */
+            text-align: center; /* تم تغييرها لتناسب الهاتف بشكل أفضل */
+            direction: rtl;
+        }
+        
+        /* استيراد الخطوط */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Changa:wght@800&display=swap');
+
+        /* الخلفية المتحركة */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(135deg, #aed581 0%, #81d4fa 100%);
+            /* إضافة صورة الخلفية */
+            background-image: url('back.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* تنسيق الواجهة الرئيسية */
+        .hero-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem; /* تم تقليلها لتناسب شاشات الهاتف */
+            gap: 1.5rem; /* تم تقليلها */
+            position: relative;
+            text-align: center;
+            z-index: 1; /* للتأكد من أن المحتوى يظهر فوق الخلفية */
+        }
+        
+        .hero-content {
+            animation: bounceInDown 1s ease-in-out;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 1rem; /* تم تقليلها */
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* العناوين و النصوص */
+        .main-title {
+            font-family: var(--main-font);
+            font-size: clamp(2.5rem, 8vw, 5rem); /* تم تعديل الحجم ليكون أكثر تجاوبًا */
+            color: var(--primary-color);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: clamp(0.9rem, 2.5vw, 1.5rem); /* تم تعديل الحجم ليكون أكثر تجاوبًا */
+            max-width: 700px;
+            margin-top: 0.5rem; /* تم تقليلها */
+        }
+        
+        /* زر التحميل المرح */
+        .download-button {
+            display: inline-block;
+            padding: 1rem 2rem; /* تم تقليلها لتناسب شاشات الهاتف */
+            margin-top: 1rem; /* تم تقليلها */
+            font-size: clamp(1rem, 3vw, 1.5rem); /* تم تعديل الحجم ليكون أكثر تجاوبًا */
+            font-weight: 900;
+            color: var(--text-light);
+            background-color: var(--accent-color);
+            border-radius: 50px;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            background-color: #0288d1;
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* صورة التطبيق المتحركة */
+        .app-mockup-container {
+            animation: float 4s ease-in-out infinite, fadeInUp 1.5s ease-in-out;
+            position: relative;
+        }
+
+        .app-mockup {
+            width: clamp(200px, 60vw, 350px); /* تم تعديل الحجم ليكون أكثر تجاوبًا */
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 8px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+        
+        /* التأثيرات الحركية المخصصة للأطفال */
+        @keyframes bounceInDown {
+            0%, 60%, 75%, 90%, 100% {
+                transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            }
+            0% { opacity: 0; transform: translate3d(0, -3000px, 0); }
+            60% { opacity: 1; transform: translate3d(0, 25px, 0); }
+            75% { transform: translate3d(0, -10px, 0); }
+            90% { transform: translate3d(0, 5px, 0); }
+            100% { transform: none; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* التجاوبية (للشاشات الصغيرة) */
+        @media (min-width: 768px) {
+            .hero-container {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+            .hero-content {
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الخلفية المتحركة -->
+    <div id="particles-js"></div>
+
+    <main class="hero-container">
+        <div class="hero-content">
+            <h1 class="main-title">هيا نلعب ونربح!</h1>
+            <p class="subtitle">تطبيق EarnV1 يمنحك الفرصة لتحويل وقتك إلى مكافآت حقيقية بكل سهولة. </p>
+            
+            <a href="https://www.mediafire.com/file/jt3dkf4afzbkkss/EarnV1.apk/file" download="EarnV1_App.apk" class="download-button">
+                <span>حمل تطبيق</span>
+            </a>
+        </div>
+        
+        <div class="app-mockup-container">
+            <img src="apk.png" alt="شاشة تطبيق EarnV1" class="app-mockup">
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 EarnV1. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <!-- سكربت الخلفية المتحركة -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": { "enable": true, "value_area": 800 }
+                },
+                "color": { "value": ["#ff6347", "#ffa07a", "#ffd700", "#7fffd4", "#4682b4"] }, /* ألوان مرحة */
+                "shape": { "type": "circle", "polygon": { "nb_sides": 5 } },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 10, "random": true },
+                "line_linked": { "enable": false },
+                "move": {
+                    "enable": true,
+                    "speed": 3,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "bubble" },
+                    "onclick": { "enable": true, "mode": "repulse" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 200, "line_linked": { "opacity": 1 } },
+                    "bubble": { "distance": 200, "size": 25, "duration": 2, "opacity": 8, "speed": 3 },
+                    "repulse": { "distance": 150, "duration": 0.4 },
+                    "push": { "particles_nb": 4 },
+                    "remove": { "particles_nb": 2 }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
